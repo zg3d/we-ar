@@ -1,0 +1,21 @@
+const express = require('express');
+const handleBars = require('express-handlebars');
+
+const app = express();
+
+app.engine('handlebars',handleBars());
+app.set('view engine','handlebars');
+
+app.get("/",(req,res)=>{
+    res.render("home",{
+        title: "test",
+        pageHeader: "test",
+    });
+});
+
+
+const PORT = process.env.PORT || 3000;
+
+app.listen( PORT, ()=>{
+    console.log(`listening on PORT ${PORT}`);
+})
