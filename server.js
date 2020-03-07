@@ -41,8 +41,26 @@ app.get('/', function (req, res) {
         
     });
 });
+var user={
+    "gender": "male",
+    "bodytype":"small",
+    "style": "casual",
+    "colorful": true,
+    "hat": false,
+    "weather": "summer"
+}
 
-
+app.get("/images",(req,res)=>{
+    data.getMatchStyle(user).then((data)=>{
+        console.log(data);
+        res.render('images',{
+            images:data
+        });
+    }).catch((err)=>{
+        res.render("images",{message:"No Result"});
+        console.log(err);
+    })
+})
 
 app.listen(PORT,()=>console.log("Web server has started"));
 
