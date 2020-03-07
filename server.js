@@ -1,12 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const handlebars = require("express-handlebars");
-<<<<<<< HEAD
-const { check, validationResult } = require('express-validator');
-
-=======
 const data = require("./data-service.js");
->>>>>>> c4f8958019f399ab5a9e1f8489d645288a88ebd2
 
 const app = express();
 const PORT = process.env.PORT || 3000;
