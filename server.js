@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const handlebars = require("express-handlebars");
-
+const data = require("./data-service.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -45,3 +45,10 @@ app.get('/', function (req, res) {
 
 
 app.listen(PORT,()=>console.log("Web server has started"));
+
+data.initialize().then(()=>{
+    console.log("initializing");
+    //app.listen(HTTP_PORT,onHttpStart);
+}).catch(err=>{
+   console.log(err);
+});
