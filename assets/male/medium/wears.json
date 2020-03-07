@@ -1,0 +1,10 @@
+[
+    {
+        "imageId": 1,
+        "imageLink": "/images/1.jpg",
+        "style": "casual",
+        "colorful": true,
+        "hat": false,
+        "weather": "summer"
+    }
+]
