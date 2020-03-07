@@ -12,20 +12,23 @@ var err=[];
 module.exports.initialize=function(){
     return new Promise(function(resolve, reject){
         try{
-        fs.readFile('./data/male/large/wears.json',  (err, data) => {
+        fs.readFile('./assets/male/large/wears.json',  (err, data) => {
             if (err) throw err;
             console.log("reading large male styles");
             Lmale=JSON.parse(data);
+            console.log(Lmale);
         });
-        fs.readFile('./data/male/medium/wears.json', (err,data)=>{
+        fs.readFile('./assets/male/medium/wears.json', (err,data)=>{
             if(err) throw err;
             console.log("reading medium male styles");
             Mmale=JSON.parse(data);
+            console.log(Mmale);
         });
-        fs.readFile('./data/male/small/wears.json',(err,data)=>{
+        fs.readFile('./assets/male/small/wears.json',(err,data)=>{
             if(err) throw err;
             console.log("reading samll male styles");
             Smale=JSON.parse(data);
+            console.log(Smale);
         })
     }catch{
         console.log("failed initializing");
@@ -46,7 +49,7 @@ module.exports.findMatch=function(style){
 
         }
         if(style.bodyType==large){
-                
+
         }
     })
 }
