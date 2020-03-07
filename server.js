@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require("express");
 const handlebars = require("express-handlebars");
+const { check, validationResult } = require('express-validator');
 
 
 const app = express();
@@ -17,17 +18,21 @@ app.get('/login', function (req, res) {
     res.render('login',{
         title: "Login",
         pageheading: "Login",
-      
-        
     });
 });
 
-app.get('/signup', function (req, res) {
+app.get('/signup', [
+    check('fname','Please Enter a First Name').isLength({ min:1}),
+    check('lname','Please Enter a Last Name').isLength({ min:1}),
+    check('email','Invaild Email').isEmail(),
+    check('email').exists(),
+    check('email','Email is Null').isLength({ min:1}),
+    check('password','Password must be at least 5 chars long').isLength({ min:5})
+    .matches(/\d/).withMessage('Password must contain a number')
+  ],function (req, res) {
     res.render('signup',{
         title: "Registration",
         pageheading: "Registration",
-      
-        
     });
 });
 
@@ -37,8 +42,6 @@ app.get('/', function (req, res) {
     res.render('home',{
         title: "Home",
         pageheading: "Homepage",
-      
-        
     });
 });
 
