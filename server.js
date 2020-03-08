@@ -10,7 +10,7 @@ const Users = require('./models/Users');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+let user = {};
 mongoose.connect(process.env.URI, {
     keepAlive: 1,
     useNewUrlParser: true,
@@ -66,7 +66,7 @@ app.post('/signup', async (req, res) => {
         errors.psw2 = "Passwords do not match";
     }
 
-    if (Object.keys(errors).length) {
+    if (Object.keys(errors).length >0) {
         console.log("fail")
         return res.render('signup',{
             title: "Registration",
@@ -103,31 +103,65 @@ app.get('/', function (req, res) {
     });
 });
 
-var user={
-    "gender": "male",
-    "bodytype":"small",
-    "style": "casual",
-    "colorful": true,
-    "hat": false,
-    "weather": "summer"
-}
+// var user={
+//     "gender": "male",
+//     "bodytype":"small",
+//     "style": "casual",
+//     "colorful": true,
+//     "hat": false,
+//     "weather": "summer"
+// }
 
 app.get("/findStyle",(req,res)=>{
     data.findstyle().then((data)=>{
 
     })
 })
-app.post('/login',(req,res)=>{
+app.post('/login', async (req,res)=>{
 
     let email = req.body.email;
     let psw = req.body.password;
     const errors = {};
 
-    if(/\\s*/.test(email) !=)
+    if(/\\s*/.test(email) != false)
+    {
+        errors.email = "Enter Email";
+    }
 
+    if(/\\s*/.test(psw) != false)
+    {
+        errors.psw = "Enter valid Password";
+    }
 
+    if(Object.keys(errors).length > 0){
+        res.render('login',{
+                title: "Login",
+            pageheading: "Login",
+            errors,
+        })
+    }
+    else {
+    try{
+         user = await Users.findOne({ Email:email }, function (err, user) {});
+            if(user.Psw !== psw)
+            {
+                errors.psw = "Password is incorrect";
+                res.render('login',{
+                    title: "Login",
+                pageheading: "Login",
+                errors,
+            })
+            }
+            else{
+                res.redirect('/dashboard');
+            }
+        }
+        catch (err){
+            console.log(err);
+        }
+        
 
-
+    }
 
 });
 app.get("/images",(req,res)=>{
