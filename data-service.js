@@ -39,62 +39,71 @@ module.exports.initialize = function () {
 
 module.exports.getMatchStyle = function (user) {
     var matchinStyle = [];
-    return new Promise(function (resolve, reject) {
-        console.log(user);
-        let hat=(user.acce==='true');
-        let colorful=(user.colorful==='true');
-        console.log(hat);
-        console.log(colorful);
+    var hat = (user.acce === 'true');
+    var colorful = (user.acce === 'true');
 
-        console.log(user.BodyT)
+    return new Promise(function (resolve, reject) {
 
         if (user.BodyT == 'Skinny') {
-            console.log("I came here");
-            
             Smale.forEach(Sstyle => {
+                console.log(Sstyle);
                 if (Sstyle.style == user.style && Sstyle.colorful == colorful && Sstyle.hat == hat && Sstyle.weather == user.weather) {
+                    console.log("Asdfasdfsdfasdf");
                     matchinStyle.push(Sstyle);
-                    resolve(matchinStyle);
-                    console.log(matchinStyle);
-
-                    console.log("Matching style for small male has found");
                 }
-            })
+            });
+
+            console.log(matchinStyle);
+
+            if (matchinStyle.length == 0) {
+                reject("No Match");
+                console.log("Cannot find a match!");
+            }
+            resolve(matchinStyle)
+            console.log("Matching style for small male has found");
+
         } else if (user.BodyT == 'Average') {
-            console.log("I came here");
-            
+
             Mmale.forEach(Mstyle => {
                 if (Mstyle.style == user.style && Mstyle.colorful == colorful && Mstyle.hat == hat && Mstyle.weather == user.weather) {
                     matchinStyle.push(Mstyle);
-                    resolve(matchinStyle);
-                    console.log(matchinStyle);
-
-                    console.log("Matching style for small male has found");
                 }
             })
-        }else if (user.BodyT == 'Big') {
-            
+            if (matchinStyle.length == 0) {
+                reject("No Match");
+                console.log("Cannot find a match!");
+            }
+            resolve(matchinStyle)
+            console.log("Matching style for small male has found");
+
+
+
+        } else if (user.BodyT == 'Big') {
+
             Lmale.forEach(Lstyle => {
                 if (Lstyle.style == user.style && Lstyle.colorful == colorful && Lstyle.hat == hat && Lstyle.weather == user.weather) {
                     matchinStyle.push(Lstyle);
-                    resolve(matchinStyle);
-                    console.log(matchinStyle);
-
-                    console.log("Matching style for small male has found");
                 }
             })
+            if (matchinStyle.length == 0) {
+                reject("No Match");
+                console.log("Cannot find a match!");
+            }
+            resolve(matchinStyle)
+            console.log("Matching style for small male has found");
         }
         else {
-            
             Smale.forEach(Sstyle => {
                 if (Sstyle.style == user.style && Sstyle.colorful == colorful && Sstyle.hat == hat && Sstyle.weather == user.weather) {
                     matchinStyle.push(Sstyle);
-                    resolve(matchinStyle);
-                    console.log(matchinStyle);
-
-                    console.log("Matching style for small male has found");
                 }
             })
+            if (matchinStyle.length == 0) {
+                reject("No Match");
+                console.log("Cannot find a match!");
+            }
+            resolve(matchinStyle)
+            console.log("Matching style for unknown male has found");
         }
     })
 }

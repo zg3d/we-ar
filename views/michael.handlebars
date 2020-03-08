@@ -1,18 +1,17 @@
 <a href="/dashboard"><img style="height: 25%; width:25%;" src="./images/logo.png"  class="rounded mx-auto d-block" alt="..."></a>
 <div class="row">
 <div class="col-md-12">
- <h2>Images</h2>
- <hr />
+ <h2 style="color: white; text-align:center">Daily Outfit</h2><br>
  </div>
  {{#if images}}
  {{#each images}} 
- <div class="col-md-4">
+ <div class="col-md-5">
  <img src="{{this.imageLink}}" class="img-responsive img-thumbnail" />
  </div>
  {{/each}}
  {{else}}
  <div class="col-md-12 text-center">
- <strong>No Images Available</strong>
+ <br><br><h2 style="color: yellow; text-align:center">Sorry, We couldn't find a matching style T - T</h2>
  </div>
  {{/if}}
 </div>
