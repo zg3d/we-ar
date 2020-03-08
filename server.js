@@ -169,15 +169,15 @@ app.post('/login', async (req,res)=>{
         }
     }
 });
+<<<<<<< HEAD
 app.post("/dailystyle", (req, res) => {
     data.getMatchStyle(user).then((data) => {
+=======
+app.get("/dailystyle", (req, res) => {
+>>>>>>> 6210003760d6ac1f67a99a1a5eaf41c833dfffe2
         res.render('michael', {
             title: "Michael",
             images:data,
-        });
-    }).catch((err)=>{
-        res.render('michael',{message:"No Result"});
-        console.log(err);
     })
 })
 app.get('/dashboard', function (req, res) {
@@ -194,7 +194,20 @@ app.get('/createstyle', (req, res)=> {
     });
 });
 
+app.post("/dailystyle", (req, res) => {
+    data.getMatchStyle(req.body).then((data) => {
+        res.render('michael', {
+            title: "Michael",
+            images:data,
+        });
+    }).catch((err)=>{
+        res.render('michael',{message:"No Result"});
+        console.log(err);
+    })
+})
+
 app.listen(PORT, () => console.log("Web server has started"));
+
 
 data.initialize().then(() => {
     console.log("initializing");
