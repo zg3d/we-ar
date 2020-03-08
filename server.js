@@ -121,17 +121,10 @@ app.post('/login', async (req,res)=>{
     let psw = req.body.password;
     const errors = {};
 
-<<<<<<< HEAD
-    //if(/\\s*/.test(email) !=)
-
-
-
-=======
     if(/\\s*/.test(email) != false)
     {
         errors.email = "Enter Email";
     }
->>>>>>> 057b9cf610d666847e0fc08f9cae69f30faa0450
 
     if(/\\s*/.test(psw) != false)
     {
