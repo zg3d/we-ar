@@ -41,6 +41,8 @@ app.get('/', function (req, res) {
         
     });
 });
+
+
 var user={
     "gender": "male",
     "bodytype":"small",
@@ -50,14 +52,21 @@ var user={
     "weather": "summer"
 }
 
+app.get("/findStyle",(req,res)=>{
+    data.findstyle().then((data)=>{
+
+    })
+})
+
 app.get("/images",(req,res)=>{
     data.getMatchStyle(user).then((data)=>{
         console.log(data);
-        res.render('images',{
-            images:data
+        res.render('michael',{
+            title: "Michael",
+            images:data,
         });
     }).catch((err)=>{
-        res.render("images",{message:"No Result"});
+        res.render('michael',{message:"No Result"});
         console.log(err);
     })
 })

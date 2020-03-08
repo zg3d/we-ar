@@ -6,5 +6,45 @@
         "colorful": true,
         "hat": false,
         "weather": "summer"
+    },
+    {
+        "imageId": 2,
+        "imageLink": "/images/2.jpg",
+        "style": "casual",
+        "colorful": false,
+        "hat": false,
+        "weather": "fall"
+    },
+    {
+        "imageId": 3,
+        "imageLink": "/images/3.jpg",
+        "style": "casual",
+        "colorful": true,
+        "hat": false,
+        "weather": "summer"
+    },
+    {
+        "imageId": 4,
+        "imageLink": "/images/4.jpg",
+        "style": "casual",
+        "colorful": false,
+        "hat": false,
+        "weather": "fall"
+    },
+    {
+        "imageId": 5,
+        "imageLink": "/images/5.jpg",
+        "style": "casual",
+        "colorful": true,
+        "hat": true,
+        "weather": "fall"
+    },
+    {
+        "imageId": 5,
+        "imageLink": "/images/5.jpg",
+        "style": "casual",
+        "colorful": true,
+        "hat": true,
+        "weather": "spring"
     }
-]
+] 

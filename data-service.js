@@ -39,21 +39,6 @@ module.exports.initialize = function () {
     })
 }
 
-module.exports.findMatch = function (style) {
-    var matchinStyle = [];
-    return new Promise(function (resolve, reject) {
-        if (style.bodyType == small) {
-
-        }
-        if (style.bodyType == medium) {
-
-        }
-        if (style.bodyType == large) {
-
-        }
-    })
-}
-
 
 module.exports.getMatchStyle = function (user) {
     var matchinStyle = [];
@@ -73,13 +58,6 @@ module.exports.getMatchStyle = function (user) {
             reject(matchinStyle);
             console.log("Couldn't found any matching style");
         }
-
-        /*  if(style.bodyType==medium){
-  
-          }
-          if(style.bodyType==large){
-  
-          }*/
     })
 }
 
