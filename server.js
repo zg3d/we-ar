@@ -52,7 +52,6 @@ app.get("/findStyle",(req,res)=>{
 
 app.get("/images",(req,res)=>{
     data.getMatchStyle(user).then((data)=>{
-        console.log(data);
         res.render('michael',{
             title: "Michael",
             images:data,
