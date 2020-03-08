@@ -1,6 +1,6 @@
 require('dotenv').config();
-const request = require('request');
 const express = require("express");
+const fetch = require('node-fetch');
 const mongoose = require('mongoose');
 const Users = require('./models/Users');
 const data = require("./data-service.js");
@@ -101,6 +101,9 @@ app.get('/', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
+// let user={
+=======
 
 app.get("/dailystyle", (req, res) => {
     res.render('michael', {
@@ -110,6 +113,7 @@ app.get("/dailystyle", (req, res) => {
 });
 
 // var user={
+>>>>>>> 767be9c0ee8330436c00bc7a21ff1054650ee02c
 //     "gender": "male",
 //     "bodytype":"small",
 //     "style": "casual",
@@ -118,9 +122,14 @@ app.get("/dailystyle", (req, res) => {
 //     "weather": "summer"
 // }
 
+<<<<<<< HEAD
+app.get("/findStyle",(req,res)=>{
+    data.findstyle().then((data)=>{
+=======
 
 app.get("/findStyle", (req, res) => {
     data.findstyle().then((data) => {
+>>>>>>> 767be9c0ee8330436c00bc7a21ff1054650ee02c
 
     })
 })
@@ -130,8 +139,13 @@ app.post('/login', async (req, res) => {
     let psw = req.body.password;
     const errors = {};
 
+<<<<<<< HEAD
+    if(/\\s*/.test(email) != false)
+    {
+=======
     //if(/\\s*/.test(email) !=)
     if (/\\s*/.test(email) != false) {
+>>>>>>> 767be9c0ee8330436c00bc7a21ff1054650ee02c
         errors.email = "Enter Email";
     }
 
@@ -164,10 +178,14 @@ app.post('/login', async (req, res) => {
         catch (err) {
             console.log(err);
         }
+<<<<<<< HEAD
+    }
+=======
 
 
     }
 
+>>>>>>> 767be9c0ee8330436c00bc7a21ff1054650ee02c
 });
 app.get("/images", (req, res) => {
     data.getMatchStyle(user).then((data) => {
@@ -197,7 +215,6 @@ app.listen(PORT, () => console.log("Web server has started"));
 
 data.initialize().then(() => {
     console.log("initializing");
-    //app.listen(HTTP_PORT,onHttpStart);
 }).catch(err => {
     console.log(err);
 });
@@ -229,25 +246,39 @@ app.post("/dailystyle", (req, res) => {
     };
 });
 
-// function listen() {
-//     if (app.get('env') === 'test') return;
-//     app.listen(port);
-//     console.log('Express app started on port ' + port);
-//   }
-
-
-// function connect() {
-//     mongoose.connection
-//       .on('error', console.log)
-//       .on('disconnected', connect)
-//       .once('open', listen);
-//     return mongoose.connect(process.env.URI, {
-//       keepAlive: 1,
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true
-//     });
-//   }
 let apiKey = process.env.WEATHER;
+<<<<<<< HEAD
+// let city = 'toronto';
+// let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+// console.log(
+//         request(url, function (err, response, body) {
+//         if(err){
+//             console.log('error:', error);
+//         } else {
+//             console.log('body:', body);
+//         }
+//     })
+// );
+
+let getTemp = async (city) =>{ 
+   try{
+        const res = await fetch (`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
+        try{
+            const temp = await res.json();
+            console.log(temp);
+            }catch(err2){
+            console.log(err2);
+            }
+   }catch(err){
+       console.log(err);
+   }
+}
+getTemp('toronto') ;
+// let weather = JSON.parse(body);
+// let message = `It's ${weather.main.temp} degrees in
+//                ${weather.name}!`;
+// console.log(message);
+=======
 let city = 'portland';
 let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
@@ -258,3 +289,4 @@ request(url, function (err, response, body) {
         console.log('body:', body);
     }
 });
+>>>>>>> 767be9c0ee8330436c00bc7a21ff1054650ee02c
