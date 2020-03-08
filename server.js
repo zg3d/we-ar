@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require("express");
 const handlebars = require("express-handlebars");
 const mongoose = require('mongoose');
-const autoIncrement = require('mongoose-auto-increment');
+// const autoIncrement = require('mongoose-auto-increment');
 const data = require("./data-service.js");
 const bodyParser = require('body-parser');
 const validEmail = require('email-validator');
@@ -11,14 +11,13 @@ const Users = require('./models/Users');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// DB connection initialization
-const connection = mongoose.createConnection(process.env.URI, {
-    useUnifiedTopology: true,
+mongoose.connect(process.env.URI, {
+    keepAlive: 1,
     useNewUrlParser: true,
-});
-
+    useUnifiedTopology: true
+  });
 // Autoincrement Plugin
-autoIncrement.initialize(connection);
+// autoIncrement.initialize(connection);
 
 // Asset status routes
 app.use(express.static('assets'));
@@ -163,3 +162,22 @@ const findUserByEmail = (email) => {
         })
     });
 }
+
+// function listen() {
+//     if (app.get('env') === 'test') return;
+//     app.listen(port);
+//     console.log('Express app started on port ' + port);
+//   }
+
+
+// function connect() {
+//     mongoose.connection
+//       .on('error', console.log)
+//       .on('disconnected', connect)
+//       .once('open', listen);
+//     return mongoose.connect(process.env.URI, {
+//       keepAlive: 1,
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true
+//     });
+//   }

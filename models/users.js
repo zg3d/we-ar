@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 const autoIncrement = require('mongoose-auto-increment');
 const Schema = mongoose.Schema;
 // creating a new Schema
+// DB connection initialization
+// const awaitConnect = await mongoose.connect(process.env.URI,{
+//     keepAlive: 1,
+//     useUnifiedTopology: true,
+//     useNewUrlParser: true,
+// })
 const connect = mongoose.createConnection(process.env.URI);
 autoIncrement.initialize(connect);
 
