@@ -79,8 +79,14 @@ app.post('/signup',  (req,res )=>{
             Style:style
 
         });
+        mongoose.connect(process.env.URI, {
+            useUnifiedTopology: true,
+            useNewUrlParser: true,
+        }).then(
+            () => { console.log("DB connected") ; 
+            user.save().then(()=>{(userSaved)=>res.json(userSaved);})
+            .catch((err)=>console.log(err));}).catch((err)=>console.log(err));
         
-        user.save().then(()=>{res.json(userSaved);}).catch((err)=>console.log(err));
         
      
      
@@ -152,10 +158,7 @@ app.get('/createstyle', function (req, res) {
     });
 });
 
-mongoose.connect(process.env.URI, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-}, () => { console.log("DB Connect") });
+
 
 
 
