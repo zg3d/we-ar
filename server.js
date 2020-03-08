@@ -11,6 +11,7 @@ const Users = require('./models/Users');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+<<<<<<< HEAD
 mongoose.connect(process.env.URI, {
     keepAlive: 1,
     useNewUrlParser: true,
@@ -18,6 +19,9 @@ mongoose.connect(process.env.URI, {
   });
 // Autoincrement Plugin
 // autoIncrement.initialize(connection);
+=======
+
+>>>>>>> adb0e0f41b1bf4a18b1153f114fbac0119f14d24
 
 // Asset status routes
 app.use(express.static('assets'));
@@ -77,7 +81,7 @@ app.post('/signup', async (req, res, next) => {
     try {
         const user = new Users({
             Nickname:nickname,
-            Email:email,
+            _id:email.toLowerCase(),
             Psw:psw,
             BodyT:bodyT,
             Style:style
