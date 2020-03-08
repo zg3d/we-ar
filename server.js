@@ -1,6 +1,6 @@
 require('dotenv').config();
-const request = require('request');
 const express = require("express");
+const fetch = require('node-fetch');
 const mongoose = require('mongoose');
 const Users = require('./models/Users');
 const data = require("./data-service.js");
@@ -101,8 +101,7 @@ app.get('/', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-// var user={
+// let user={
 //     "gender": "male",
 //     "bodytype":"small",
 //     "style": "casual",
@@ -110,16 +109,6 @@ app.get('/', (req, res) => {
 //     "hat": false,
 //     "weather": "summer"
 // }
-=======
-let user={
-    "gender": "male",
-    "bodytype":"small",
-    "style": "casual",
-    "colorful": true,
-    "hat": false,
-    "weather": "summer"
-}
->>>>>>> cc4c349c0048161f107fb63d61607bd2d5558ca5
 
 app.get("/findStyle",(req,res)=>{
     data.findstyle().then((data)=>{
@@ -132,9 +121,6 @@ app.post('/login', async (req,res)=>{
     let psw = req.body.password;
     const errors = {};
 
-<<<<<<< HEAD
-    //if(/\\s*/.test(email) !=)
-=======
     if(/\\s*/.test(email) != false)
     {
         errors.email = "Enter Email";
@@ -171,11 +157,7 @@ app.post('/login', async (req,res)=>{
         catch (err){
             console.log(err);
         }
-        
-
     }
-
->>>>>>> f60614d47b500d16ce449e54cb9125b57a3e2c3a
 });
 app.get("/images",(req,res)=>{
     data.getMatchStyle(user).then((data)=>{
@@ -205,7 +187,6 @@ app.listen(PORT, () => console.log("Web server has started"));
 
 data.initialize().then(() => {
     console.log("initializing");
-    //app.listen(HTTP_PORT,onHttpStart);
 }).catch(err => {
     console.log(err);
 });
@@ -222,32 +203,34 @@ const findUserByEmail = (email) => {
     });
 }
 
-// function listen() {
-//     if (app.get('env') === 'test') return;
-//     app.listen(port);
-//     console.log('Express app started on port ' + port);
-//   }
-
-
-// function connect() {
-//     mongoose.connection
-//       .on('error', console.log)
-//       .on('disconnected', connect)
-//       .once('open', listen);
-//     return mongoose.connect(process.env.URI, {
-//       keepAlive: 1,
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true
-//     });
-//   }
 let apiKey = process.env.WEATHER;
-let city = 'portland';
-let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+// let city = 'toronto';
+// let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+// console.log(
+//         request(url, function (err, response, body) {
+//         if(err){
+//             console.log('error:', error);
+//         } else {
+//             console.log('body:', body);
+//         }
+//     })
+// );
 
-request(url, function (err, response, body) {
-    if(err){
-        console.log('error:', error);
-    } else {
-        console.log('body:', body);
-    }
-});
+let getTemp = async (city) =>{ 
+   try{
+        const res = await fetch (`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
+        try{
+            const temp = await res.json();
+            console.log(temp);
+            }catch(err2){
+            console.log(err2);
+            }
+   }catch(err){
+       console.log(err);
+   }
+}
+getTemp('toronto') ;
+// let weather = JSON.parse(body);
+// let message = `It's ${weather.main.temp} degrees in
+//                ${weather.name}!`;
+// console.log(message);
