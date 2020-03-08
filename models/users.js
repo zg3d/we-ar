@@ -2,24 +2,34 @@ const mongoose = require('mongoose');
 
 
 
-const userSchema = mongoose.Schema({
-
-    email:{
+const UserSchema = mongoose.Schema({
+    Nickname:{
         type: String,
         required:true
     },
-    psw:{
+    Email:{
+        type: String,
+        required:true
+    },
+    Psw:{
         type:String,
         required:true
-    }
-    date:  {
+    },
+    Date:  {
         type: Date,
-        default: Date.now;
+        default: Date.now
+    },
+    BodyT:{
+        type :String,
+        default: "average"
+    },
+    Style:{
+        type:String,
+        required:true
+
     }
-
-
-
-
 
 
 });
+
+module.exports = mongoose.model('Users',UserSchema);
