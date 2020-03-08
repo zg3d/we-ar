@@ -120,16 +120,6 @@ app.get('/addPic', (req, res) => {
     });
 });
 
-// let user={
-//     "gender": "male",
-//     "bodytype":"small",
-//     "style": "casual",
-//     "colorful": true,
-//     "hat": false,
-//     "weather": "summer"
-// }
-
-
 app.get("/findStyle",(req,res)=>{
     data.findstyle().then((data)=>{
 
@@ -214,7 +204,6 @@ app.post("/dailystyle", (req, res) => {
 })
 
 app.listen(PORT, () => console.log("Web server has started"));
-
 
 data.initialize().then(() => {
     console.log("initializing");
