@@ -181,6 +181,7 @@ app.get('/dashboard', function (req, res) {
     res.render('dashboard', {
         title: "Dashboard",
         pageheading: "Dashboard",
+        user
     });
 });
 app.get('/createstyle', (req, res)=> {
