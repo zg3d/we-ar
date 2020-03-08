@@ -191,17 +191,7 @@ data.initialize().then(() => {
     console.log(err);
 });
 
-const findUserByEmail = (email) => {
-    if(!email) return false;
-    return new Promise((resolve, reject) => {
-        Users.findOne({ Email: email })
-        .exec((err, doc) => {
-            if (err) return reject(err)
-            if (doc) return reject(new Error('This email already exists. Please enter another email.'))
-            else return resolve(email)
-        })
-    });
-}
+
 
 let apiKey = process.env.WEATHER;
 let getTemp = async (city) =>{ 
