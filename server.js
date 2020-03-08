@@ -151,6 +151,8 @@ app.post('/login', async (req,res)=>{
             })
             }
             else{
+                console.log(user);
+
                 res.redirect('/dashboard');
             }
         }
@@ -174,7 +176,7 @@ app.get('/dashboard', function (req, res) {
     res.render('dashboard', {
         title: "Dashboard",
         pageheading: "Dashboard",
-        user
+        name:user.Nickname,
     });
 });
 app.get('/createstyle', (req, res)=> {
