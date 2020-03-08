@@ -26,12 +26,12 @@ app.set('view engine', 'handlebars');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-
+ 
 // parse application/json
 app.use(bodyParser.json());
 
-app.get('/signup', (req, res) => {
-    res.render('signup', {
+app.get('/signup', (req, res) =>{
+    res.render('signup',{
         title: "Registration",
         pageheading: "Registration",
     });
@@ -49,7 +49,7 @@ app.post('/signup', async (req, res, next) => {
     const errors = {};
 
     if (/^\\s*$/.test(nickname) !== false) {
-        errors.nickname = "Please enter a nickname";
+        errors.nickname = "Please enter a nickname" ;
     }
 
     if (validEmail.validate(email) !== true) {
@@ -64,9 +64,9 @@ app.post('/signup', async (req, res, next) => {
         errors.psw2 = "Passwords do not match";
     }
 
-    if (Object.keys(errors).length > 0) {
+    if (Object.keys(errors).length >0) {
         console.log("fail")
-        return res.render('signup', {
+        return res.render('signup',{
             title: "Registration",
             pageheading: "Registration",
             errors,
@@ -74,11 +74,11 @@ app.post('/signup', async (req, res, next) => {
     }
     try {
         const user = new Users({
-            Nickname: nickname,
-            Email: email,
-            Psw: psw,
-            BodyT: bodyT,
-            Style: style
+            Nickname:nickname,
+            Email:email,
+            Psw:psw,
+            BodyT:bodyT,
+            Style:style
         });
         const userSaved = await user.save();
         res.redirect('/login');
@@ -101,19 +101,7 @@ app.get('/', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
 // let user={
-=======
-
-app.get("/dailystyle", (req, res) => {
-    res.render('michael', {
-        title: "Michael",
-        images: data,
-    });
-});
-
-// var user={
->>>>>>> 767be9c0ee8330436c00bc7a21ff1054650ee02c
 //     "gender": "male",
 //     "bodytype":"small",
 //     "style": "casual",
@@ -122,79 +110,63 @@ app.get("/dailystyle", (req, res) => {
 //     "weather": "summer"
 // }
 
-<<<<<<< HEAD
 app.get("/findStyle",(req,res)=>{
     data.findstyle().then((data)=>{
-=======
-
-app.get("/findStyle", (req, res) => {
-    data.findstyle().then((data) => {
->>>>>>> 767be9c0ee8330436c00bc7a21ff1054650ee02c
 
     })
 })
-app.post('/login', async (req, res) => {
+app.post('/login', async (req,res)=>{
 
     let email = req.body.email;
     let psw = req.body.password;
     const errors = {};
 
-<<<<<<< HEAD
     if(/\\s*/.test(email) != false)
     {
-=======
-    //if(/\\s*/.test(email) !=)
-    if (/\\s*/.test(email) != false) {
->>>>>>> 767be9c0ee8330436c00bc7a21ff1054650ee02c
         errors.email = "Enter Email";
     }
 
-    if (/\\s*/.test(psw) != false) {
+    if(/\\s*/.test(psw) != false)
+    {
         errors.psw = "Enter valid Password";
     }
 
-    if (Object.keys(errors).length > 0) {
-        res.render('login', {
-            title: "Login",
+    if(Object.keys(errors).length > 0){
+        res.render('login',{
+                title: "Login",
             pageheading: "Login",
             errors,
         })
     }
     else {
-        try {
-            user = await Users.findOne({ Email: email }, function (err, user) { });
-            if (user.Psw !== psw) {
+    try{
+         user = await Users.findOne({ Email:email }, function (err, user) {});
+            if(user.Psw !== psw)
+            {
                 errors.psw = "Password is incorrect";
-                res.render('login', {
+                res.render('login',{
                     title: "Login",
-                    pageheading: "Login",
-                    errors,
-                })
+                pageheading: "Login",
+                errors,
+            })
             }
-            else {
+            else{
                 res.redirect('/dashboard');
             }
         }
-        catch (err) {
+        catch (err){
             console.log(err);
         }
-<<<<<<< HEAD
     }
-=======
-
-
-    }
-
->>>>>>> 767be9c0ee8330436c00bc7a21ff1054650ee02c
 });
-app.get("/images", (req, res) => {
-    data.getMatchStyle(user).then((data) => {
-        res.render('michael', {
+app.get("/images",(req,res)=>{
+    data.getMatchStyle(user).then((data)=>{
+        res.render('michael',{
             title: "Michael",
-            images: data,
+            images:data,
         });
-    }).catch((err) => {
-        res.render('michael', { message: "No Result" });
+    }).catch((err)=>{
+        res.render('michael',{message:"No Result"});
         console.log(err);
     })
 })
@@ -204,8 +176,8 @@ app.get('/dashboard', function (req, res) {
         pageheading: "Dashboard",
     });
 });
-app.get('/createstyle', (req, res) => {
-    res.render('createstyle', {
+app.get('/createstyle', (req, res)=> {
+    res.render('createstyle',{
         title: "Create Style",
         pageheading: "Create Style",
     });
@@ -219,53 +191,25 @@ data.initialize().then(() => {
     console.log(err);
 });
 
-app.post("/dailystyle", (req, res) => {
-    data.getMatchStyle(req.body).then((data) => {
-        res.render('michael', {
-            title: "Michael",
-            images: data,
-        });
-    }).catch((err) => {
-        res.render('michael', { message: "No Result" });
-        console.log(err);
+const findUserByEmail = (email) => {
+    if(!email) return false;
+    return new Promise((resolve, reject) => {
+        Users.findOne({ Email: email })
+        .exec((err, doc) => {
+            if (err) return reject(err)
+            if (doc) return reject(new Error('This email already exists. Please enter another email.'))
+            else return resolve(email)
+        })
     });
-
-
-
-
-    const findUserByEmail = (email) => {
-        if (!email) return false;
-        return new Promise((resolve, reject) => {
-            Users.findOne({ Email: email })
-                .exec((err, doc) => {
-                    if (err) return reject(err)
-                    if (doc) return reject(new Error('This email already exists. Please enter another email.'))
-                    else return resolve(email)
-                })
-        });
-    };
-});
+}
 
 let apiKey = process.env.WEATHER;
-<<<<<<< HEAD
-// let city = 'toronto';
-// let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
-// console.log(
-//         request(url, function (err, response, body) {
-//         if(err){
-//             console.log('error:', error);
-//         } else {
-//             console.log('body:', body);
-//         }
-//     })
-// );
-
 let getTemp = async (city) =>{ 
    try{
         const res = await fetch (`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
         try{
             const temp = await res.json();
-            console.log(temp);
+            return temp.main.feels_like -273.15;
             }catch(err2){
             console.log(err2);
             }
@@ -273,20 +217,4 @@ let getTemp = async (city) =>{
        console.log(err);
    }
 }
-getTemp('toronto') ;
-// let weather = JSON.parse(body);
-// let message = `It's ${weather.main.temp} degrees in
-//                ${weather.name}!`;
-// console.log(message);
-=======
-let city = 'portland';
-let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-
-request(url, function (err, response, body) {
-    if (err) {
-        console.log('error:', error);
-    } else {
-        console.log('body:', body);
-    }
-});
->>>>>>> 767be9c0ee8330436c00bc7a21ff1054650ee02c
+user.temp = getTemp('toronto') ;
