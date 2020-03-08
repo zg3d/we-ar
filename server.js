@@ -121,32 +121,15 @@ app.get('/', function (req, res) {
 });
 
 
-var user={
-    "gender": "male",
-    "bodytype":"small",
-    "style": "casual",
-    "colorful": true,
-    "hat": false,
-    "weather": "summer"
-}
 
-app.get("/findStyle",(req,res)=>{
-    data.findstyle().then((data)=>{
 
-    })
-})
+app.get("/dailystyle",(req,res)=>{   
+    res.render('michael',{
+        title: "Michael",
+        images:data,
+    });
+});
 
-app.get("/images",(req,res)=>{
-    data.getMatchStyle(user).then((data)=>{
-        res.render('michael',{
-            title: "Michael",
-            images:data,
-        });
-    }).catch((err)=>{
-        res.render('michael',{message:"No Result"});
-        console.log(err);
-    })
-})
 app.get('/dashboard', function (req, res) {
     res.render('dashboard', {
         title: "Dashboard",
@@ -173,6 +156,16 @@ data.initialize().then(() => {
     console.log(err);
 });
 
+app.post("/dailystyle", (req, res) => {
+    data.getMatchStyle(req.body).then((data)=>{
+        res.render('michael',{
+            title: "Michael",
+            images:data,
+        });
+    }).catch((err)=>{
+        res.render('michael',{message:"No Result"});
+        console.log(err);
+    });
 
 
 
@@ -190,3 +183,4 @@ const findUserByEmail= (email)=>{
         })
       }
    }
+});

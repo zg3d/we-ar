@@ -40,11 +40,21 @@ module.exports.initialize = function () {
 module.exports.getMatchStyle = function (user) {
     var matchinStyle = [];
     return new Promise(function (resolve, reject) {
-        if (user.bodytype == 'small') {
+        console.log(user);
+        let hat=(user.acce==='true');
+        let colorful=(user.colorful==='true');
+        console.log(hat);
+        console.log(colorful);
+
+        if (user.style == 'formal') {
+            console.log("I came here");
+            
             Smale.forEach(Sstyle => {
-                if (Sstyle.style == user.style && Sstyle.colorful == user.colorful && Sstyle.hat == user.hat && Sstyle.weather == user.weather) {
+                if (Sstyle.style == user.style && Sstyle.colorful == colorful && Sstyle.hat == hat && Sstyle.weather == user.weather) {
                     matchinStyle.push(Sstyle);
                     resolve(matchinStyle);
+                    console.log(matchinStyle);
+
                     console.log("Matching style for small male has found");
                 }
             })
