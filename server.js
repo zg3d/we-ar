@@ -1,12 +1,12 @@
 require('dotenv').config();
+const request = require('request');
 const express = require("express");
-const handlebars = require("express-handlebars");
 const mongoose = require('mongoose');
-// const autoIncrement = require('mongoose-auto-increment');
+const Users = require('./models/Users');
 const data = require("./data-service.js");
 const bodyParser = require('body-parser');
+const handlebars = require("express-handlebars");
 const validEmail = require('email-validator');
-const Users = require('./models/Users');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,8 +17,6 @@ mongoose.connect(process.env.URI, {
     useUnifiedTopology: true
 });
 // Autoincrement Plugin
-// autoIncrement.initialize(connection);
-
 // Asset status routes
 app.use(express.static('assets'));
 
@@ -47,7 +45,7 @@ app.post('/signup', async (req, res, next) => {
         psw2,
         bodyT,
         style
-    } = res.body;
+    } = req.body;
     const errors = {};
 
     if (/^\\s*$/.test(nickname) !== false) {
@@ -123,12 +121,7 @@ app.post('/login',(req,res)=>{
     let psw = req.body.password;
     const errors = {};
 
-    if(/\\s*/.test(email) !=)
-
-
-
-
-
+    //if(/\\s*/.test(email) !=)
 });
 app.get("/images",(req,res)=>{
     data.getMatchStyle(user).then((data)=>{
@@ -193,3 +186,14 @@ const findUserByEmail = (email) => {
 //       useUnifiedTopology: true
 //     });
 //   }
+let apiKey = process.env.WEATHER;
+let city = 'portland';
+let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`
+
+request(url, function (err, response, body) {
+    if(err){
+        console.log('error:', error);
+    } else {
+        console.log('body:', body);
+    }
+});
