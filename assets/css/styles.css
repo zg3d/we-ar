@@ -1,4 +1,7 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 314d2564ddd7add2f2f8d9c75b27ae826c90498c
+.centered {
+    position: fixed;
+    top: 36%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-51.60%, -50%);
+  }
