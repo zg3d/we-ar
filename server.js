@@ -5,12 +5,9 @@ const mongoose = require('mongoose')
 const data = require("./data-service.js");
 
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-
-
-
 
 app.use(express.static('assets'));
 
@@ -38,6 +35,33 @@ app.get('/', function (req, res) {
     });
 });
 
+
+var user={
+    "gender": "male",
+    "bodytype":"small",
+    "style": "casual",
+    "colorful": true,
+    "hat": false,
+    "weather": "summer"
+}
+
+app.get("/findStyle",(req,res)=>{
+    data.findstyle().then((data)=>{
+
+    })
+})
+
+app.get("/images",(req,res)=>{
+    data.getMatchStyle(user).then((data)=>{
+        res.render('michael',{
+            title: "Michael",
+            images:data,
+        });
+    }).catch((err)=>{
+        res.render('michael',{message:"No Result"});
+        console.log(err);
+    })
+})
 app.get('/dashboard', function (req, res) {
     res.render('dashboard', {
         title: "Dashboard",
