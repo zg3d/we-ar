@@ -150,8 +150,29 @@
         "colorful": false,
         "hat": true,
         "weather": "fall"
+    },
+    {
+        "imageId": 14,
+        "imageLink": "/images/14.jpg",
+        "style": "casual",
+        "colorful": false,
+        "hat": true,
+        "weather": "summer"
+    },
+    {
+        "imageId": 15,
+        "imageLink": "/images/15.jpg",
+        "style": "casual",
+        "colorful": false,
+        "hat": true,
+        "weather": "winter"
+    },
+    {
+        "imageId": 16,
+        "imageLink": "/images/16.jpg",
+        "style": "casual",
+        "colorful": true,
+        "hat": true,
+        "weather": "winter"
     }
-
-
-
 ] 
