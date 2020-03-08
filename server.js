@@ -75,12 +75,13 @@ app.post('/signup',  (req,res )=>{
         console.log("success")
         const user = new Users({
             Nickname:nickname,
-            Email:email,
+            _id:email.toLowerCase(),
             Psw:psw,
             BodyT:bodyT,
             Style:style
 
         });
+       
         mongoose.connect(process.env.URI, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
@@ -88,9 +89,6 @@ app.post('/signup',  (req,res )=>{
             () => { console.log("DB connected") ; 
             user.save().then(()=>{(userSaved)=>res.json(userSaved);})
             .catch((err)=>console.log(err));}).catch((err)=>console.log(err));
-        
-        
-     
      
         
         
@@ -111,7 +109,33 @@ app.get('/login', function (req, res) {
     });
 });
 
+app.post('/login', (req,res)=>{
+    const email = req.body.email.toLowerCase();
+    const pass = req.body.password;
+    const errors = [];
 
+    const user = {};
+
+    mongoose.connect(process.env.URI, {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+    }).then(
+       async () => { console.log("DB connected") ; 
+       user= await Users.findById(email)}).catch((err)=>console.log(err));
+        console.log(user);
+        
+      
+            res.render('login',{
+                title: "Login",
+                pageheading: "Login",
+                errors
+            });
+        
+    
+    
+    
+
+});
 
 app.get('/', function (req, res) {
     res.render('home', {
