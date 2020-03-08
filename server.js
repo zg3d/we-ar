@@ -50,6 +50,8 @@ app.post('/signup',  (req,res )=>{
         errors.email = "Please enter a valid email";
     }
 
+    
+
     if(/\\s*/.test(psw) !== false)
     {
         errors.psw = "Please enter a password using non space characters";
@@ -172,3 +174,19 @@ data.initialize().then(() => {
 });
 
 
+
+
+
+const findUserByEmail= (email)=>{
+
+    if(email){
+        return new Promise((resolve, reject) => {
+          Users.findOne({ email: email })
+            .exec((err, doc) => {
+              if (err) return reject(err)
+              if (doc) return reject(new Error('This email already exists. Please enter another email.'))
+              else return resolve(email)
+            })
+        })
+      }
+   }
