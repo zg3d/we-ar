@@ -1,30 +1,98 @@
-<script>
-    
-    function hack(a){
-        if(a==1){
-        document.getElementById("div1").style.zIndex=3;
-        } 
-        else if(a==2){    
-        document.getElementById("div1").style.zIndex=1;
-        }
-    
-    }   
-</script>
-<br>
-<form>
-<div class="form-group row" >
-    <div class="col-sm-10" id="div1" style="z-index = 1">
-    <input type="text" class="form-control"  placeholder="Formal or Casual" name="nickname">
-    </div>
-    <div class="col-sm-10" id="div2" style="z-index = 2">
-    <input type="text" class="form-control"  placeholder="Colour or Non-Colour" name="nickname">
-    </div>
-    <div class="col-sm-10" id="div3" style="z-index = 3">
-    <input type="text" class="form-control" placeholder="Accessories or Non" name="nickname">
-    </div>
-</div> 
-  
-</form>
-<button onclick="hack(1)" id="1">Next</button>
-<button onclick="hack(2)" id="2">Go Back</button>
+<fieldset>
+<form method="POST" action="/dailystyle">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 style="color: white; text-align:center">Create Your Style!</h2>
+            </div>
+        </div>
+        <div class="row mt-5 mb-5">
+            <div class="col-md-5">
+                <label for="formal"><img src="/images/formal.jpg"
+                        class="img-responsive img-thumbnail rounded float-right" /></label>
+                <h2 style="color: white; text-align:center"><input type="radio" id="formal" name="style"
+                        value="formal">Formal</h2>
+            </div>
 
+            <div class="container col-md-2 col-centered text-center">
+                <h2 style="color: white;"><br><Br><Br><br><br><br><br>OR<br><Br><Br><br><br><br>
+            </div>
+
+            <div class="col-md-5">
+                <label for="casual"><img src="/images/casual.jpg" class="img-responsive img-thumbnail" /></label>
+                <h2 style="color: white; text-align:center"><input type="radio" id="casual" name="style"
+                        value="casual">Casual</h2>
+            </div>
+        </div>
+
+        <div class="row mt-5 mb-5">
+            <div class="col-md-5">
+                <label for="colorful"><img src="/images/colorful.jpg"
+                        class="img-responsive img-thumbnail rounded float-right" /></label>
+                <h2 style="color: white; text-align:center"><input type="radio" id="colorful" name="colorful"
+                        value="true">Colorful</h2>
+            </div>
+
+            <div class="container col-md-2 text-center">
+                <h2 style="color: white;"><br><br><br>OR</h2>
+            </div>
+
+            <div class="col-md-5">
+                <label for="nocolorful"><img src="/images/non-colorful.jpg"
+                        class="img-responsive img-thumbnail" /></label>
+                <h2 style="color: white; text-align:center"><input type="radio" id="nocolorful" name="colorful"
+                        value="false">Not Colorful</h2>
+            </div>
+        </div>
+
+        <div class="row mt-5 mb-5">
+            <div class="col-md-5">
+                <label for="acce"><img src="/images/acce.jpg"
+                        class="img-responsive img-thumbnail rounded float-center" /></label>
+                <h2 style="color: white; text-align:center"><input id="acce" type="radio" name="acce"
+                        value="true">Accessory</h2>
+            </div>
+            <div class="container col-md-2 text-center">
+                <h2 style="color: white;"><br><br><br>OR</h2>
+            </div>
+
+            <div class="col-md-5">
+                <label for="noacce"><img src="/images/no-acce.jpg" class="img-responsive img-thumbnail" /></label>
+                <h2 style="color: white; text-align:center"><input id="noacce" type="radio" name="acce" value="false">No
+                    Accessory</h2>
+            </div>
+        </div>
+        <div class="row mt-5 mb-5">
+            <div class="col-md-3">
+                <label for="spring"><img src="/images/spring.jpg"
+                        class="img-responsive img-thumbnail rounded float-center" /></label>
+                <h2 style="color: white; text-align:center"><input id="spring" type="radio" name="weather"
+                        value="spring">Spring</h2>
+            </div>
+            <div class="col-md-3">
+                <label for="summer"><img src="/images/summer.jpg"
+                        class="img-responsive img-thumbnail rounded float-center" /></label>
+                <h2 style="color: white; text-align:center"><input id="summer" type="radio" name="weather"
+                        value="summer">Summer</h2>
+            </div>
+            <div class="col-md-3">
+                <label for="fall"><img src="/images/fall.jpg"
+                        class="img-responsive img-thumbnail rounded float-center" /></label>
+                <h2 style="color: white; text-align:center"><input id="fall" type="radio" name="weather"
+                        value="fall">Fall</h2>
+            </div>
+            <div class="col-md-3">
+                <label for="winter"><img src="/images/winter.jpg"
+                        class="img-responsive img-thumbnail rounded float-center" /></label>
+                <h2 style="color: white; text-align:center"><input id="winter" type="radio" name="weather"
+                        value="winter">Winter</h2>
+            </div>
+        </div>
+        <div class="row mt-5 mb-5 ">
+            <div class="col-md-12 ">
+                <input class="btn btn-primary" style="float: right" type="submit" value="Create Style!">
+            </div>
+        </div>
+    </div>
+</form>
+</fieldset>
