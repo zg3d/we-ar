@@ -20,7 +20,7 @@ const UserSchema = new Schema({
         type: String,
         required:true
     },
-    _id:{
+    Email:{
         type: String,
         required:true
     },

@@ -11,7 +11,6 @@ const Users = require('./models/Users');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-<<<<<<< HEAD
 mongoose.connect(process.env.URI, {
     keepAlive: 1,
     useNewUrlParser: true,
@@ -19,9 +18,6 @@ mongoose.connect(process.env.URI, {
   });
 // Autoincrement Plugin
 // autoIncrement.initialize(connection);
-=======
-
->>>>>>> adb0e0f41b1bf4a18b1153f114fbac0119f14d24
 
 // Asset status routes
 app.use(express.static('assets'));
@@ -43,7 +39,7 @@ app.get('/signup', (req, res) =>{
     });
 });
 
-app.post('/signup', async (req, res, next) => {
+app.post('/signup', async (req, res) => {
     const {
         nickname,
         email,
@@ -51,7 +47,7 @@ app.post('/signup', async (req, res, next) => {
         psw2,
         bodyT,
         style
-    } = res.body;
+    } = req.body;
     const errors = {};
 
     if (/^\\s*$/.test(nickname) !== false) {
@@ -81,7 +77,7 @@ app.post('/signup', async (req, res, next) => {
     try {
         const user = new Users({
             Nickname:nickname,
-            _id:email.toLowerCase(),
+            Email:email.toLowerCase(),
             Psw:psw,
             BodyT:bodyT,
             Style:style
