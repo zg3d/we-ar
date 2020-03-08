@@ -34,6 +34,12 @@ app.get('/', function (req, res) {
     });
 });
 
+app.get('/dashboard', function (req, res) {
+    res.render('dashboard',{
+        title: "Dashboard",
+        pageheading: "Dashboard",
+    });
+});
 
 
 app.listen(PORT,()=>console.log("Web server has started"));
