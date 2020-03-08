@@ -134,6 +134,24 @@
         "colorful": true,
         "hat": true,
         "weather": "spring"
+    },
+    {
+        "imageId": 13,
+        "imageLink": "/images/13.jpg",
+        "style": "casual",
+        "colorful": false,
+        "hat": true,
+        "weather": "spring"
+    },
+    {
+        "imageId": 13,
+        "imageLink": "/images/13.jpg",
+        "style": "casual",
+        "colorful": false,
+        "hat": true,
+        "weather": "fall"
     }
+
+
 
 ] 

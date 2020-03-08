@@ -103,6 +103,13 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/addPic', (req, res) => {
+    res.render('addPic', {
+        title: "Add Picture",
+        pageheading: "Add Picture",
+    });
+});
+
 // let user={
 //     "gender": "male",
 //     "bodytype":"small",
@@ -111,6 +118,7 @@ app.get('/', (req, res) => {
 //     "hat": false,
 //     "weather": "summer"
 // }
+
 
 app.get("/findStyle",(req,res)=>{
     data.findstyle().then((data)=>{
@@ -163,15 +171,15 @@ app.post('/login', async (req,res)=>{
         }
     }
 });
-app.get("/images",(req,res)=>{
-    data.getMatchStyle(user).then((data)=>{
-        res.render('michael',{
+<<<<<<< HEAD
+app.post("/dailystyle", (req, res) => {
+    data.getMatchStyle(user).then((data) => {
+=======
+app.get("/dailystyle", (req, res) => {
+>>>>>>> 6210003760d6ac1f67a99a1a5eaf41c833dfffe2
+        res.render('michael', {
             title: "Michael",
             images:data,
-        });
-    }).catch((err)=>{
-        res.render('michael',{message:"No Result"});
-        console.log(err);
     })
 })
 app.get('/dashboard', function (req, res) {
@@ -188,7 +196,20 @@ app.get('/createstyle', (req, res)=> {
     });
 });
 
+app.post("/dailystyle", (req, res) => {
+    data.getMatchStyle(req.body).then((data) => {
+        res.render('michael', {
+            title: "Michael",
+            images:data,
+        });
+    }).catch((err)=>{
+        res.render('michael',{message:"No Result"});
+        console.log(err);
+    })
+})
+
 app.listen(PORT, () => console.log("Web server has started"));
+
 
 data.initialize().then(() => {
     console.log("initializing");
