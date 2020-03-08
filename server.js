@@ -117,7 +117,19 @@ app.get("/findStyle",(req,res)=>{
 
     })
 })
+app.post('/login',(req,res)=>{
 
+    let email = req.body.email;
+    let psw = req.body.password;
+    const errors = {};
+
+    if(/\\s*/.test(email) !=)
+
+
+
+
+
+});
 app.get("/images",(req,res)=>{
     data.getMatchStyle(user).then((data)=>{
         res.render('michael',{
