@@ -46,7 +46,9 @@ module.exports.getMatchStyle = function (user) {
         console.log(hat);
         console.log(colorful);
 
-        if (user.style == 'formal') {
+        console.log(user.BodyT)
+
+        if (user.BodyT == 'Skinny') {
             console.log("I came here");
             
             Smale.forEach(Sstyle => {
@@ -58,9 +60,41 @@ module.exports.getMatchStyle = function (user) {
                     console.log("Matching style for small male has found");
                 }
             })
-        } else {
-            reject(matchinStyle);
-            console.log("Couldn't found any matching style");
+        } else if (user.BodyT == 'Average') {
+            console.log("I came here");
+            
+            Mmale.forEach(Mstyle => {
+                if (Mstyle.style == user.style && Mstyle.colorful == colorful && Mstyle.hat == hat && Mstyle.weather == user.weather) {
+                    matchinStyle.push(Mstyle);
+                    resolve(matchinStyle);
+                    console.log(matchinStyle);
+
+                    console.log("Matching style for small male has found");
+                }
+            })
+        }else if (user.BodyT == 'Big') {
+            
+            Lmale.forEach(Lstyle => {
+                if (Lstyle.style == user.style && Lstyle.colorful == colorful && Lstyle.hat == hat && Lstyle.weather == user.weather) {
+                    matchinStyle.push(Lstyle);
+                    resolve(matchinStyle);
+                    console.log(matchinStyle);
+
+                    console.log("Matching style for small male has found");
+                }
+            })
+        }
+        else {
+            
+            Smale.forEach(Sstyle => {
+                if (Sstyle.style == user.style && Sstyle.colorful == colorful && Sstyle.hat == hat && Sstyle.weather == user.weather) {
+                    matchinStyle.push(Sstyle);
+                    resolve(matchinStyle);
+                    console.log(matchinStyle);
+
+                    console.log("Matching style for small male has found");
+                }
+            })
         }
     })
 }

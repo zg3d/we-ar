@@ -1,119 +1,100 @@
 require('dotenv').config();
+const request = require('request');
 const express = require("express");
-const handlebars = require("express-handlebars");
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Users = require('./models/Users');
 const data = require("./data-service.js");
 const bodyParser = require('body-parser');
+const handlebars = require("express-handlebars");
 const validEmail = require('email-validator');
-const Users = require('./models/Users')
-
-
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+let user = {};
+mongoose.connect(process.env.URI, {
+    keepAlive: 1,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+// Autoincrement Plugin
+// Asset status routes
 app.use(express.static('assets'));
 
+// View handlebar plugin
 app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
- 
+
 // parse application/json
 app.use(bodyParser.json());
 
-app.get('/signup', (req, res) =>{
-    res.render('signup',{
+app.get('/signup', (req, res) => {
+    res.render('signup', {
         title: "Registration",
         pageheading: "Registration",
     });
 });
 
-
-app.post('/signup',  (req,res )=>{
-    let nickname = req.body.nickname;
-    let email = req.body.email;
-    let psw = req.body.psw;
-    let psw2= req.body.psw2;
-    let bodyT = req.body.bodyT;
-    let style = req.body.style;
+app.post('/signup', async (req, res, next) => {
+    const {
+        nickname,
+        email,
+        psw,
+        psw2,
+        bodyT,
+        style
+    } = req.body;
     const errors = {};
 
-    if(/^\\s*$/.test(nickname) !== false)
-    {
-        errors.nickname = "Please enter a nickname" ;
+    if (/^\\s*$/.test(nickname) !== false) {
+        errors.nickname = "Please enter a nickname";
     }
 
-    if(validEmail.validate(email) !== true)
-    {
+    if (validEmail.validate(email) !== true) {
         errors.email = "Please enter a valid email";
     }
 
-    
-
-    if(/\\s*/.test(psw) !== false)
-    {
+    if (/\\s*/.test(psw) !== false) {
         errors.psw = "Please enter a password using non space characters";
     }
 
-    if(psw !== psw2)
-    {
+    if (psw !== psw2) {
         errors.psw2 = "Passwords do not match";
     }
 
-    if(Object.keys(errors) >0)
-    {
+    if (Object.keys(errors).length > 0) {
         console.log("fail")
-        res.render('signup',{
+        return res.render('signup', {
             title: "Registration",
             pageheading: "Registration",
             errors,
         });
     }
-    else{
-        console.log("success")
+    try {
         const user = new Users({
-            Nickname:nickname,
-            Email:email,
-            Psw:psw,
-            BodyT:bodyT,
-            Style:style
-
+            Nickname: nickname,
+            Email: email,
+            Psw: psw,
+            BodyT: bodyT,
+            Style: style
         });
-        mongoose.connect(process.env.URI, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-        }).then(
-            () => { console.log("DB connected") ; 
-            user.save().then(()=>{(userSaved)=>res.json(userSaved);})
-            .catch((err)=>console.log(err));}).catch((err)=>console.log(err));
-        
-        
-     
-     
-        
-        
-        res.redirect('/dashboard')
-
+        const userSaved = await user.save();
+        res.redirect('/login');
+    } catch ($e) {
+        console.error(err);
     }
 });
 
-
-
-
-
-
-app.get('/login', function (req, res) {
+app.get('/login', (req, res) => {
     res.render('login', {
         title: "Login",
         pageheading: "Login",
     });
 });
 
-
-
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
     res.render('home', {
         title: "Home",
         pageheading: "Homepage",
@@ -121,31 +102,96 @@ app.get('/', function (req, res) {
 });
 
 
-
-
-app.get("/dailystyle",(req,res)=>{   
-    res.render('michael',{
+app.get("/dailystyle", (req, res) => {
+    res.render('michael', {
         title: "Michael",
-        images:data,
+        images: data,
     });
 });
 
+// var user={
+//     "gender": "male",
+//     "bodytype":"small",
+//     "style": "casual",
+//     "colorful": true,
+//     "hat": false,
+//     "weather": "summer"
+// }
+
+
+app.get("/findStyle", (req, res) => {
+    data.findstyle().then((data) => {
+
+    })
+})
+app.post('/login', async (req, res) => {
+
+    let email = req.body.email;
+    let psw = req.body.password;
+    const errors = {};
+
+    //if(/\\s*/.test(email) !=)
+    if (/\\s*/.test(email) != false) {
+        errors.email = "Enter Email";
+    }
+
+    if (/\\s*/.test(psw) != false) {
+        errors.psw = "Enter valid Password";
+    }
+
+    if (Object.keys(errors).length > 0) {
+        res.render('login', {
+            title: "Login",
+            pageheading: "Login",
+            errors,
+        })
+    }
+    else {
+        try {
+            user = await Users.findOne({ Email: email }, function (err, user) { });
+            if (user.Psw !== psw) {
+                errors.psw = "Password is incorrect";
+                res.render('login', {
+                    title: "Login",
+                    pageheading: "Login",
+                    errors,
+                })
+            }
+            else {
+                res.redirect('/dashboard');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+
+    }
+
+});
+app.get("/images", (req, res) => {
+    data.getMatchStyle(user).then((data) => {
+        res.render('michael', {
+            title: "Michael",
+            images: data,
+        });
+    }).catch((err) => {
+        res.render('michael', { message: "No Result" });
+        console.log(err);
+    })
+})
 app.get('/dashboard', function (req, res) {
     res.render('dashboard', {
         title: "Dashboard",
         pageheading: "Dashboard",
     });
 });
-app.get('/createstyle', function (req, res) {
-    res.render('createstyle',{
+app.get('/createstyle', (req, res) => {
+    res.render('createstyle', {
         title: "Create Style",
         pageheading: "Create Style",
     });
 });
-
-
-
-
 
 app.listen(PORT, () => console.log("Web server has started"));
 
@@ -157,30 +203,58 @@ data.initialize().then(() => {
 });
 
 app.post("/dailystyle", (req, res) => {
-    data.getMatchStyle(req.body).then((data)=>{
-        res.render('michael',{
+    data.getMatchStyle(req.body).then((data) => {
+        res.render('michael', {
             title: "Michael",
-            images:data,
+            images: data,
         });
-    }).catch((err)=>{
-        res.render('michael',{message:"No Result"});
+    }).catch((err) => {
+        res.render('michael', { message: "No Result" });
         console.log(err);
     });
 
 
 
 
-const findUserByEmail= (email)=>{
-
-    if(email){
+    const findUserByEmail = (email) => {
+        if (!email) return false;
         return new Promise((resolve, reject) => {
-          Users.findOne({ email: email })
-            .exec((err, doc) => {
-              if (err) return reject(err)
-              if (doc) return reject(new Error('This email already exists. Please enter another email.'))
-              else return resolve(email)
-            })
-        })
-      }
-   }
+            Users.findOne({ Email: email })
+                .exec((err, doc) => {
+                    if (err) return reject(err)
+                    if (doc) return reject(new Error('This email already exists. Please enter another email.'))
+                    else return resolve(email)
+                })
+        });
+    };
+});
+
+// function listen() {
+//     if (app.get('env') === 'test') return;
+//     app.listen(port);
+//     console.log('Express app started on port ' + port);
+//   }
+
+
+// function connect() {
+//     mongoose.connection
+//       .on('error', console.log)
+//       .on('disconnected', connect)
+//       .once('open', listen);
+//     return mongoose.connect(process.env.URI, {
+//       keepAlive: 1,
+//       useNewUrlParser: true,
+//       useUnifiedTopology: true
+//     });
+//   }
+let apiKey = process.env.WEATHER;
+let city = 'portland';
+let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+
+request(url, function (err, response, body) {
+    if (err) {
+        console.log('error:', error);
+    } else {
+        console.log('body:', body);
+    }
 });
