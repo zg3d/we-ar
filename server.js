@@ -17,28 +17,20 @@ app.get('/login', function (req, res) {
     res.render('login',{
         title: "Login",
         pageheading: "Login",
-      
-        
     });
 });
 
-app.get('/signup', function (req, res) {
+app.get('/signup',function (req, res) {
     res.render('signup',{
         title: "Registration",
         pageheading: "Registration",
-      
-        
     });
 });
-
-
 
 app.get('/', function (req, res) {
     res.render('home',{
         title: "Home",
         pageheading: "Homepage",
-      
-        
     });
 });
 
@@ -70,6 +62,12 @@ app.get("/images",(req,res)=>{
         console.log(err);
     })
 })
+app.get('/dashboard', function (req, res) {
+    res.render('dashboard',{
+        title: "Dashboard",
+        pageheading: "Dashboard",
+    });
+});
 
 app.listen(PORT,()=>console.log("Web server has started"));
 
