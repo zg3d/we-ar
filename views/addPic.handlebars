@@ -1,5 +1,31 @@
-<form action="/" method="post">
-    <label for="fileToUpload">Picture To Upload</label>
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <button class="btn btn-info btn-block my-4" type="submit">Upload</button>
-</form>
+<br>
+<a href="/"><img style="height: 25%; width:25%;" src="./images/logo.png"  class="rounded mx-auto d-block" alt="..."></a>
+<div class="container bg-light rounded-lg">
+    <div>
+        <form action="/" method="post" class="m-2 p-5">
+            <div class="form-row mb-5">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Cloth type">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Size">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col" style="justify-content:center">
+                    <label for="color" style="color: black;" >Choose a Color &nbsp; </label>
+                    <input type="color">
+                </div>
+                <div class="col" >
+                    <div class="btn btn-primary btn-sm float-left" style="">
+                        <span>Choose file</span>
+                        <input type="file">
+                    </div>    
+                </div>
+            </div>
+        <br><br>
+            <button class="btn btn-info btn-block my-4" type="submit">Upload</button>
+        </form>
+    </div>
+</div>
