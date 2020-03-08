@@ -46,5 +46,94 @@
         "colorful": true,
         "hat": true,
         "weather": "spring"
+    },
+    {
+        "imageId": 6,
+        "imageLink": "/images/6.jpg",
+        "style": "formal",
+        "colorful": false,
+        "hat": false,
+        "weather": "fall"
+    },
+    {
+        "imageId": 7,
+        "imageLink": "/images/7.jpg",
+        "style": "formal",
+        "colorful": false,
+        "hat": false,
+        "weather": "fall"
+    },
+    {
+        "imageId": 8,
+        "imageLink": "/images/8.jpg",
+        "style": "formal",
+        "colorful": true,
+        "hat": false,
+        "weather": "fall"
+    },
+    {
+        "imageId": 9,
+        "imageLink": "/images/9.jpg",
+        "style": "formal",
+        "colorful": true,
+        "hat": false,
+        "weather": "fall"
+    },
+    {
+        "imageId": 9,
+        "imageLink": "/images/9.jpg",
+        "style": "formal",
+        "colorful": true,
+        "hat": false,
+        "weather": "spring"
+    },
+    {
+        "imageId": 10,
+        "imageLink": "/images/10.jpg",
+        "style": "formal",
+        "colorful": true,
+        "hat": false,
+        "weather": "spring"
+    },
+    {
+        "imageId": 10,
+        "imageLink": "/images/10.jpg",
+        "style": "formal",
+        "colorful": true,
+        "hat": false,
+        "weather": "summer"
+    },
+    {
+        "imageId": 11,
+        "imageLink": "/images/11.jpg",
+        "style": "formal",
+        "colorful": false,
+        "hat": true,
+        "weather": "winter"
+    },
+    {
+        "imageId": 11,
+        "imageLink": "/images/11.jpg",
+        "style": "formal",
+        "colorful": false,
+        "hat": true,
+        "weather": "fall"
+    },
+    {
+        "imageId": 12,
+        "imageLink": "/images/12.jpg",
+        "style": "formal",
+        "colorful": true,
+        "hat": true,
+        "weather": "summer"
+    },
+    {
+        "imageId": 12,
+        "imageLink": "/images/12.jpg",
+        "style": "formal",
+        "colorful": true,
+        "hat": true,
+        "weather": "spring"
     }
+
 ] 
