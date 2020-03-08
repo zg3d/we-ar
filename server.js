@@ -144,6 +144,12 @@ app.get('/dashboard', function (req, res) {
         pageheading: "Dashboard",
     });
 });
+app.get('/createstyle', function (req, res) {
+    res.render('createstyle',{
+        title: "Create Style",
+        pageheading: "Create Style",
+    });
+});
 
 mongoose.connect(process.env.URI, {
     useUnifiedTopology: true,
