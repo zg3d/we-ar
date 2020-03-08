@@ -3,11 +3,7 @@ var Lmale = [];
 var Mmale = [];
 var Smale = [];
 
-
-
 var err = [];
-
-
 
 module.exports.initialize = function () {
     return new Promise(function (resolve, reject) {

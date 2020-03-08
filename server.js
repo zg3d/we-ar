@@ -171,6 +171,11 @@ app.post('/login', async (req,res)=>{
         }
     }
 });
+app.get("/thankyou",(req,res)=>{
+    res.render('thankyou', {
+        title: "Thank You!",
+    })
+})
 app.get("/dailystyle", (req, res) => {
         res.render('michael', {
             title: "Michael",
