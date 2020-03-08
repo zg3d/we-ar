@@ -1,7 +1,8 @@
-require('dotenv').config();
 const express = require("express");
 const handlebars = require("express-handlebars");
 const data = require("./data-service.js");
+
+require('dotenv').config({path:"./config/keys.env"});
 
 const app = express();
 const PORT = process.env.PORT || 3000;
