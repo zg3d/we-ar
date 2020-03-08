@@ -68,6 +68,12 @@ app.get('/dashboard', function (req, res) {
         pageheading: "Dashboard",
     });
 });
+app.get('/createstyle', function (req, res) {
+    res.render('createstyle',{
+        title: "Create Style",
+        pageheading: "Create Style",
+    });
+});
 
 app.listen(PORT,()=>console.log("Web server has started"));
 
