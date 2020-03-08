@@ -1,19 +1,22 @@
 require('dotenv').config();
 const express = require("express");
 const handlebars = require("express-handlebars");
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const autoIncrement = require('mongoose-auto-increment');
 const data = require("./data-service.js");
 const bodyParser = require('body-parser');
 const validEmail = require('email-validator');
-const Users = require('./models/Users')
-
-
+const Users = require('./models/Users');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+
+// Asset status routes
 app.use(express.static('assets'));
 
+// View handlebar plugin
 app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
 
@@ -30,77 +33,55 @@ app.get('/signup', (req, res) =>{
     });
 });
 
-
-app.post('/signup',  (req,res )=>{
-    let nickname = req.body.nickname;
-    let email = req.body.email;
-    let psw = req.body.psw;
-    let psw2= req.body.psw2;
-    let bodyT = req.body.bodyT;
-    let style = req.body.style;
+app.post('/signup', async (req, res, next) => {
+    const {
+        nickname,
+        email,
+        psw,
+        psw2,
+        bodyT,
+        style
+    } = res.body;
     const errors = {};
 
-    if(/^\\s*$/.test(nickname) !== false)
-    {
+    if (/^\\s*$/.test(nickname) !== false) {
         errors.nickname = "Please enter a nickname" ;
     }
 
-    if(validEmail.validate(email) !== true)
-    {
+    if (validEmail.validate(email) !== true) {
         errors.email = "Please enter a valid email";
     }
 
-    
-
-    if(/\\s*/.test(psw) !== false)
-    {
+    if (/\\s*/.test(psw) !== false) {
         errors.psw = "Please enter a password using non space characters";
     }
 
-    if(psw !== psw2)
-    {
+    if (psw !== psw2) {
         errors.psw2 = "Passwords do not match";
     }
 
-    if(Object.keys(errors) >0)
-    {
+    if (Object.keys(errors).length) {
         console.log("fail")
-        res.render('signup',{
+        return res.render('signup',{
             title: "Registration",
             pageheading: "Registration",
             errors,
         });
     }
-    else{
-        console.log("success")
+    try {
         const user = new Users({
             Nickname:nickname,
             _id:email.toLowerCase(),
             Psw:psw,
             BodyT:bodyT,
             Style:style
-
         });
-       
-        mongoose.connect(process.env.URI, {
-            useUnifiedTopology: true,
-            useNewUrlParser: true,
-        }).then(
-            () => { console.log("DB connected") ; 
-            user.save().then(()=>{(userSaved)=>res.json(userSaved);})
-            .catch((err)=>console.log(err));}).catch((err)=>console.log(err));
-     
-        
-        
-        res.redirect('/dashboard')
-
+        const userSaved = await user.save();
+        res.redirect('/login');
+    } catch ($e) {
+        console.error(err);
     }
 });
-
-
-
-
-
 
 app.get('/login', function (req, res) {
     res.render('login', {
@@ -109,41 +90,12 @@ app.get('/login', function (req, res) {
     });
 });
 
-app.post('/login', (req,res)=>{
-    const email = req.body.email.toLowerCase();
-    const pass = req.body.password;
-    const errors = [];
-
-    const user = {};
-
-    mongoose.connect(process.env.URI, {
-        useUnifiedTopology: true,
-        useNewUrlParser: true,
-    }).then(
-       async () => { console.log("DB connected") ; 
-       user= await Users.findById(email)}).catch((err)=>console.log(err));
-        console.log(user);
-        
-      
-            res.render('login',{
-                title: "Login",
-                pageheading: "Login",
-                errors
-            });
-        
-    
-    
-    
-
-});
-
 app.get('/', function (req, res) {
     res.render('home', {
         title: "Home",
         pageheading: "Homepage",
     });
 });
-
 
 var user={
     "gender": "male",
@@ -184,10 +136,6 @@ app.get('/createstyle', function (req, res) {
     });
 });
 
-
-
-
-
 app.listen(PORT, () => console.log("Web server has started"));
 
 data.initialize().then(() => {
@@ -197,20 +145,14 @@ data.initialize().then(() => {
     console.log(err);
 });
 
-
-
-
-
-const findUserByEmail= (email)=>{
-
-    if(email){
-        return new Promise((resolve, reject) => {
-          Users.findOne({ email: email })
-            .exec((err, doc) => {
-              if (err) return reject(err)
-              if (doc) return reject(new Error('This email already exists. Please enter another email.'))
-              else return resolve(email)
-            })
+const findUserByEmail = (email) => {
+    if(!email) return false;
+    return new Promise((resolve, reject) => {
+        Users.findOne({ Email: email })
+        .exec((err, doc) => {
+            if (err) return reject(err)
+            if (doc) return reject(new Error('This email already exists. Please enter another email.'))
+            else return resolve(email)
         })
-      }
-   }
+    });
+}

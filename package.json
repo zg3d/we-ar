@@ -27,6 +27,7 @@
     "handlebars": "^4.7.3",
     "install": "^0.13.0",
     "mongodb": "^3.5.4",
-    "mongoose": "^5.9.3"
+    "mongoose": "^5.9.3",
+    "mongoose-auto-increment": "^5.0.1"
   }
 }
