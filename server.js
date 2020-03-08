@@ -15,7 +15,7 @@ mongoose.connect(process.env.URI, {
     keepAlive: 1,
     useNewUrlParser: true,
     useUnifiedTopology: true
-  });
+});
 // Autoincrement Plugin
 // autoIncrement.initialize(connection);
 
@@ -39,7 +39,7 @@ app.get('/signup', (req, res) =>{
     });
 });
 
-app.post('/signup', async (req, res) => {
+app.post('/signup', async (req, res, next) => {
     const {
         nickname,
         email,
@@ -47,7 +47,7 @@ app.post('/signup', async (req, res) => {
         psw2,
         bodyT,
         style
-    } = req.body;
+    } = res.body;
     const errors = {};
 
     if (/^\\s*$/.test(nickname) !== false) {
@@ -77,7 +77,7 @@ app.post('/signup', async (req, res) => {
     try {
         const user = new Users({
             Nickname:nickname,
-            Email:email.toLowerCase(),
+            Email:email,
             Psw:psw,
             BodyT:bodyT,
             Style:style
@@ -89,20 +89,21 @@ app.post('/signup', async (req, res) => {
     }
 });
 
-app.get('/login', function (req, res) {
+app.get('/login', (req, res) => {
     res.render('login', {
         title: "Login",
         pageheading: "Login",
     });
 });
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
     res.render('home', {
         title: "Home",
         pageheading: "Homepage",
     });
 });
 
+<<<<<<< HEAD
 // var user={
 //     "gender": "male",
 //     "bodytype":"small",
@@ -111,6 +112,16 @@ app.get('/', function (req, res) {
 //     "hat": false,
 //     "weather": "summer"
 // }
+=======
+let user={
+    "gender": "male",
+    "bodytype":"small",
+    "style": "casual",
+    "colorful": true,
+    "hat": false,
+    "weather": "summer"
+}
+>>>>>>> cc4c349c0048161f107fb63d61607bd2d5558ca5
 
 app.get("/findStyle",(req,res)=>{
     data.findstyle().then((data)=>{
@@ -181,7 +192,7 @@ app.get('/dashboard', function (req, res) {
         pageheading: "Dashboard",
     });
 });
-app.get('/createstyle', function (req, res) {
+app.get('/createstyle', (req, res)=> {
     res.render('createstyle',{
         title: "Create Style",
         pageheading: "Create Style",
