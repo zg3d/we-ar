@@ -31,7 +31,7 @@ app.get('/signup', (req, res) =>{
 });
 
 
-app.post('/signup', async (req,res )=>{
+app.post('/signup',  (req,res )=>{
     let nickname = req.body.nickname;
     let email = req.body.email;
     let psw = req.body.psw;
@@ -62,6 +62,7 @@ app.post('/signup', async (req,res )=>{
 
     if(Object.keys(errors) >0)
     {
+        console.log("fail")
         res.render('signup',{
             title: "Registration",
             pageheading: "Registration",
@@ -69,6 +70,7 @@ app.post('/signup', async (req,res )=>{
         });
     }
     else{
+        console.log("success")
         const user = new Users({
             Nickname:nickname,
             Email:email,
@@ -77,15 +79,14 @@ app.post('/signup', async (req,res )=>{
             Style:style
 
         });
-        try{
-        const userSaved = await user.save();
-        res.json(userSaved);
-        }
-        catch (err){
-            res.json({message:err});
-        }
         
-        res.redirect('/dashboard');
+        user.save().then(()=>{res.json(userSaved);}).catch((err)=>console.log(err));
+        
+     
+     
+        
+        
+        res.redirect('/dashboard')
 
     }
 });
