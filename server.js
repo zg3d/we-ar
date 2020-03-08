@@ -123,7 +123,7 @@ app.post('/login',(req,res)=>{
     let psw = req.body.password;
     const errors = {};
 
-    if(/\\s*/.test(email) !=)
+    //if(/\\s*/.test(email) !=)
 
 
 
