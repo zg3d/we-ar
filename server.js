@@ -101,6 +101,13 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/addPic', (req, res) => {
+    res.render('addPic', {
+        title: "Add Picture",
+        pageheading: "Add Picture",
+    });
+});
+
 // let user={
 //     "gender": "male",
 //     "bodytype":"small",
@@ -109,6 +116,7 @@ app.get('/', (req, res) => {
 //     "hat": false,
 //     "weather": "summer"
 // }
+
 
 app.get("/findStyle",(req,res)=>{
     data.findstyle().then((data)=>{
