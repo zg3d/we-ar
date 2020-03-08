@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require("express");
 const fetch = require('node-fetch');
 const mongoose = require('mongoose');
-const Users = require('./models/Users');
+const Users = require('./models/users');
 const data = require("./data-service.js");
 const bodyParser = require('body-parser');
 const handlebars = require("express-handlebars");
