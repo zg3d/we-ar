@@ -1,78 +1,68 @@
-<form method="POST" action="/signup">
-    <br>
-    <br>
-  {{!-- <div class="row">
-    <div class="col">
-      <input type="text" class="form-control" placeholder="First name">
-    </div>
-    <div class="col">
-      <input type="text" class="form-control" placeholder="Last name">
-    </div>
-  </div> --}}
-  <div class="form-group row">
-    <label for="nick" class="col-sm-2 col-form-label">Nickname</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="nick" placeholder="Nickname" name="nickname">
-    </div>
-    
-  </div>
-  
-  <div class="form-group row">
-    <label for="email" class="col-sm-2 col-form-label">Email</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="email" placeholder="Email" name="email">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="psw" class="col-sm-2 col-form-label">Password</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="psw" placeholder="Password" name="psw">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="psw2" class="col-sm-2 col-form-label">Re-Password</label>
-    <div class="col-sm-10">
-      <input type="password" class="form-control" id="psw2" placeholder="Password" name="psw2">
-    </div>
-  </div>
-  <fieldset class="form-group">
-    <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">Body type</legend>
+<div class="bg-light" style="height: 100vh;">
+  <form method="POST" action="/signup">
+    <div class="form-group row">
+      <label for="nick" class="col-sm-2 col-form-label">Nickname</label>
       <div class="col-sm-10">
-        <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="bodyT" id="inlineRadio1" value="Skinny">
-        <label class="form-check-label" for="inlineRadio1">Skinny</label>
-        </div>
-        <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="bodyT" id="inlineRadio2" value="Average">
-        <label class="form-check-label" for="inlineRadio2">Average</label>
-        </div>
-        <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="bodyT" id="inlineRadio3" value="Big">
-        <label class="form-check-label" for="inlineRadio3">Big</label>
-        </div>
+        <input type="text" class="form-control" id="nick" placeholder="Nickname" name="nickname">
       </div>
     </div>
-  </fieldset>
-  <fieldset class="form-group">
-    <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">Style Preference</legend>
+    <div class="form-group row">
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
       <div class="col-sm-10">
-        <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="style" id="inlineRadio12" value="Men">
-        <label class="form-check-label" for="inlineRadio12">Men</label>
-        </div>
-        <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="style" id="inlineRadio883" value="Women">
-        <label class="form-check-label" for="inlineRadio883">Women</label>
-        </div>
+        <input type="email" class="form-control" id="email" placeholder="Email" name="email">
       </div>
     </div>
-  </fieldset>
-    
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Sign in</button>
+    <div class="form-group row">
+      <label for="psw" class="col-sm-2 col-form-label">Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="psw" placeholder="Password" name="psw">
+      </div>
     </div>
-  </div>
-</form>
+    <div class="form-group row">
+      <label for="psw2" class="col-sm-2 col-form-label">Re-Password</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="psw2" placeholder="Password" name="psw2">
+      </div>
+    </div>
+    <fieldset class="form-group">
+      <div class="row">
+        <legend class="col-form-label col-sm-2 pt-0">Body type</legend>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="bodyT" id="inlineRadio1" value="Skinny">
+          <label class="form-check-label" for="inlineRadio1">Skinny</label>
+          </div>
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="bodyT" id="inlineRadio2" value="Average">
+          <label class="form-check-label" for="inlineRadio2">Average</label>
+          </div>
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="bodyT" id="inlineRadio3" value="Big">
+          <label class="form-check-label" for="inlineRadio3">Big</label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="form-group">
+      <div class="row">
+        <legend class="col-form-label col-sm-2 pt-0">Style Preference</legend>
+        <div class="col-sm-10">
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="style" id="inlineRadio12" value="Men">
+          <label class="form-check-label" for="inlineRadio12">Men</label>
+          </div>
+          <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="style" id="inlineRadio883" value="Women">
+          <label class="form-check-label" for="inlineRadio883">Women</label>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+      
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </div>
+    </div>
+  </form>
+</div>  
