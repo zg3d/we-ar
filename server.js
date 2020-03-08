@@ -10,7 +10,7 @@ const validEmail = require('email-validator');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+let user = {};
 mongoose.connect(process.env.URI, {
     keepAlive: 1,
     useNewUrlParser: true,
@@ -64,7 +64,7 @@ app.post('/signup', async (req, res, next) => {
         errors.psw2 = "Passwords do not match";
     }
 
-    if (Object.keys(errors).length) {
+    if (Object.keys(errors).length >0) {
         console.log("fail")
         return res.render('signup',{
             title: "Registration",
@@ -101,6 +101,16 @@ app.get('/', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
+// var user={
+//     "gender": "male",
+//     "bodytype":"small",
+//     "style": "casual",
+//     "colorful": true,
+//     "hat": false,
+//     "weather": "summer"
+// }
+=======
 let user={
     "gender": "male",
     "bodytype":"small",
@@ -109,19 +119,63 @@ let user={
     "hat": false,
     "weather": "summer"
 }
+>>>>>>> cc4c349c0048161f107fb63d61607bd2d5558ca5
 
 app.get("/findStyle",(req,res)=>{
     data.findstyle().then((data)=>{
 
     })
 })
-app.post('/login',(req,res)=>{
+app.post('/login', async (req,res)=>{
 
     let email = req.body.email;
     let psw = req.body.password;
     const errors = {};
 
+<<<<<<< HEAD
     //if(/\\s*/.test(email) !=)
+=======
+    if(/\\s*/.test(email) != false)
+    {
+        errors.email = "Enter Email";
+    }
+
+    if(/\\s*/.test(psw) != false)
+    {
+        errors.psw = "Enter valid Password";
+    }
+
+    if(Object.keys(errors).length > 0){
+        res.render('login',{
+                title: "Login",
+            pageheading: "Login",
+            errors,
+        })
+    }
+    else {
+    try{
+         user = await Users.findOne({ Email:email }, function (err, user) {});
+            if(user.Psw !== psw)
+            {
+                errors.psw = "Password is incorrect";
+                res.render('login',{
+                    title: "Login",
+                pageheading: "Login",
+                errors,
+            })
+            }
+            else{
+                res.redirect('/dashboard');
+            }
+        }
+        catch (err){
+            console.log(err);
+        }
+        
+
+    }
+
+>>>>>>> f60614d47b500d16ce449e54cb9125b57a3e2c3a
 });
 app.get("/images",(req,res)=>{
     data.getMatchStyle(user).then((data)=>{
