@@ -83,7 +83,19 @@ app.post('/signup', async (req, res, next) => {
             Style:style
         });
         const userSaved = await user.save();
-        res.redirect('/login');
+        const sgMail = require('@sendgrid/mail');
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        msg = {
+            to: `${email}`,
+            from: 'noreply@we-ar.com',
+            subject: 'You Have Successfully Signed Up ',
+            text: `Hello ${nickname}`,
+            html: `<strong>Welecome to the best experince in your life. Your Login info is ${email} and ${psw}</strong>`,
+           
+          };
+          sgMail.send(msg).then(()=>{
+        res.redirect("/login"
+    );}).catch(err=>(console.log(err)));
     } catch ($e) {
         console.error(err);
     }
@@ -171,12 +183,7 @@ app.post('/login', async (req,res)=>{
         }
     }
 });
-<<<<<<< HEAD
-app.post("/dailystyle", (req, res) => {
-    data.getMatchStyle(user).then((data) => {
-=======
 app.get("/dailystyle", (req, res) => {
->>>>>>> 6210003760d6ac1f67a99a1a5eaf41c833dfffe2
         res.render('michael', {
             title: "Michael",
             images:data,
